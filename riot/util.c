@@ -46,7 +46,7 @@ cvttorunes(char *p, int n, Rune *r, int *nb, int *nr, int *nulls)
 void
 error(char *s)
 {
-	fprint(2, "rio: %s: %r\n", s);
+	fprint(2, "riot: %s: %r\n", s);
 	if(errorshouldabort)
 		abort();
 	threadexitsall("error");

@@ -197,7 +197,7 @@ filsysproc(void *arg)
 		n = read9pmsg(fs->sfd, buf, messagesize);
 		if(n <= 0){
 			yield();	/* if threadexitsall'ing, will not return */
-			fprint(2, "rio: %d: read9pmsg: %d %r\n", getpid(), n);
+			fprint(2, "riot: %d: read9pmsg: %d %r\n", getpid(), n);
 			errorshouldabort = 0;
 			error("eof or i/o error on server channel");
 		}
@@ -210,7 +210,7 @@ filsysproc(void *arg)
 		if(convM2S(buf, n, x) != n)
 			error("convert error in convM2S");
 		if(DEBUG)
-			fprint(2, "rio:<-%F\n", &x->Fcall);
+			fprint(2, "riot:<-%F\n", &x->Fcall);
 		if(fcall[x->type] == nil)
 			x = filsysrespond(fs, x, &t, Ebadfcall);
 		else{
@@ -266,7 +266,7 @@ filsysrespond(Filsys *fs, Xfid *x, Fcall *t, char *err)
 	if(write(fs->sfd, x->buf, n) != n)
 		error("write error in respond");
 	if(DEBUG)
-		fprint(2, "rio:->%F\n", t);
+		fprint(2, "riot:->%F\n", t);
 	free(x->buf);
 	x->buf = nil;
 	return x;
@@ -305,7 +305,7 @@ filsysauth(Filsys *fs, Xfid *x, Fid*)
 {
 	Fcall t;
 
-		return filsysrespond(fs, x, &t, "rio: authentication not required");
+		return filsysrespond(fs, x, &t, "riot: authentication not required");
 }
 
 static

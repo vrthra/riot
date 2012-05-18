@@ -118,7 +118,7 @@ wsetname(Window *w)
 		w->name[n+1] = 0;
 	}
 	w->name[0] = 0;
-	fprint(2, "rio: setname failed: %s\n", err);
+	fprint(2, "riot: setname failed: %s\n", err);
 }
 
 void

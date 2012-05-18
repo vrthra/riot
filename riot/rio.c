@@ -177,7 +177,7 @@ threadmain(int argc, char *argv[])
 	if(fontname){
 		/* check font before barging ahead */
 		if(access(fontname, 0) < 0){
-			fprint(2, "rio: can't access %s: %r\n", fontname);
+			fprint(2, "riot: can't access %s: %r\n", fontname);
 			exits("font open");
 		}
 		putenv("font", fontname);
@@ -187,7 +187,7 @@ threadmain(int argc, char *argv[])
 	gotscreen = access("/dev/screen", AEXIST)==0;
 
 	if(geninitdraw(nil, derror, nil, "rio", nil, Refnone) < 0){
-		fprint(2, "rio: can't open display: %r\n");
+		fprint(2, "riot: can't open display: %r\n");
 		exits("display open");
 	}
 	iconinit();
@@ -218,7 +218,7 @@ threadmain(int argc, char *argv[])
 	filsys = filsysinit(xfidinit());
 
 	if(filsys == nil)
-		fprint(2, "rio: can't create file system server: %r\n");
+		fprint(2, "riot: can't create file system server: %r\n");
 	else{
 		errorshouldabort = 1;	/* suicide if there's trouble after this */
 		if(initstr)
@@ -297,7 +297,7 @@ initcmd(void *arg)
 	cmd = arg;
 	rfork(RFENVG|RFFDG|RFNOTEG|RFNAMEG);
 	procexecl(nil, "/bin/rc", "rc", "-c", cmd, nil);
-	fprint(2, "rio: exec failed: %r\n");
+	fprint(2, "riot: exec failed: %r\n");
 	exits("exec");
 }
 
