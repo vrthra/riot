@@ -694,7 +694,7 @@ wkeyctl(Window *w, Rune r)
 			return;
 	}
 	if(r != Kdel){
-		wsnarf(w);
+		/* reomvoed wsnarf(w); - we do not want the act of deleting to put stuff in snarf buffer */
 		wcut(w);
 	}
 	switch(r){
@@ -705,8 +705,8 @@ wkeyctl(Window *w, Rune r)
 		*notefd = w->notefd;
 		proccreate(interruptproc, notefd, 4096);
 		return;
+	/*case Kins:	Insert: file name completion */
 	case Kack:	/* ^F: file name completion */
-	case Kins:	/* Insert: file name completion */
 		rp = namecomplete(w);
 		if(rp == nil)
 			return;
@@ -1071,10 +1071,13 @@ wselect(Window *w)
 				wsnarf(w);
 				wcut(w);
 			}else{
-				if(first){
+				/*if(first){
 					first = 0;
 					getsnarf();
-				}
+				}*/
+				/*We really want to behave as copy if some
+				thing is selected and paste if not*/
+				wsnarf(w);
 				wpaste(w);
 			}
 		}
